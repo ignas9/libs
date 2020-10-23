@@ -1216,7 +1216,7 @@ function Material.Load(Config)
 			local MenuAdded, MenuButton = TryAddMenu(DropdownBar, Menu, {})
 			
 			if MenuAdded then
-				DropdownToggle.Position -= UDim2.fromOffset(25,0)
+				DropdownToggle.Position = DropdownToggle.Position - UDim2.fromOffset(25,0)
 				MenuButton.ImageColor3 = Theme.DropdownAccent
 			end
 			
@@ -2018,7 +2018,7 @@ function Material.Load(Config)
 			local MenuAdded, MenuButton = TryAddMenu(ColorLabel, ColorPickerMenu, {})
 			
 			if MenuAdded then
-				ColorTracker.Position -= UDim2.fromOffset(25,0)
+				ColorTracker.Position = ColorTracker.Position - UDim2.fromOffset(25,0)
 				MenuButton.ImageColor3 = Theme.ColorPickerAccent
 			end
 			
@@ -2113,7 +2113,7 @@ function Material.Load(Config)
 			local MenuAdded, MenuButton = TryAddMenu(Toggle, Menu, {})
 			
 			if MenuAdded then
-				ToggleTracker.Position -= UDim2.fromOffset(15,0)
+				ToggleTracker.Position = ToggleTracker.Position - UDim2.fromOffset(15,0)
 				MenuButton.ImageColor3 = Theme.Toggle
 			end
 			
@@ -2188,16 +2188,16 @@ function Material.Load(Config)
 				TweenService:Create(TextInput, TweenInfo.new(0.5), {TextTransparency = 0}):Play()
 			end)
 			
-			TextInput.FocusLost:Connect(function()
+			TextInput.FocusLost:Connect(function(enter)
 				TweenService:Create(TextField, TweenInfo.new(0.5), {ImageTransparency = 0.8}):Play()
 				TweenService:Create(TextInput, TweenInfo.new(0.5), {TextTransparency = 0.5}):Play()
-				TextFieldCallback(TextInput.Text)
+				TextFieldCallback(TextInput.Text,enter)
 			end)
 			
 			local MenuAdded, MenuBar = TryAddMenu(TextField, Menu, {
 				SetText = function(Value)
 					TextInput.Text = Value
-					TextFieldCallback(TextInput.Text)
+					TextFieldCallback(TextInput.Text,true)
 				end
 			})
 			
@@ -2282,7 +2282,7 @@ function Material.Load(Config)
 			local MaxSize = 36
 			
 			local SizeFromScale = (MinSize +  (MaxSize - MinSize)) * DefaultScale
-			SizeFromScale -= (SizeFromScale % 2)
+			SizeFromScale = SizeFromScale - (SizeFromScale % 2)
 			
 			local SliderDot = Objects.new("CircleButton")
 			SliderDot.Size = UDim2.fromOffset(10,10)
@@ -2315,7 +2315,7 @@ function Material.Load(Config)
 					local Px = GetXY(SliderTracker)
 					local SizeFromScale = (MinSize +  (MaxSize - MinSize)) * Px
 					local Value = math.floor(SliderMin + ((SliderMax - SliderMin) * Px))
-					SizeFromScale -= (SizeFromScale % 2)
+					SizeFromScale = SizeFromScale - (SizeFromScale % 2)
 					TweenService:Create(SliderDot, TweenInfo.new(0.15), {Position = UDim2.fromScale(Px,0.5) - UDim2.fromOffset(5,5)}):Play()
 					TweenService:Create(SliderFill, TweenInfo.new(0.15), {Size = UDim2.fromScale(Px, 1)}):Play()
 					SliderFadedDot.Size = UDim2.fromOffset(SizeFromScale,SizeFromScale)
@@ -2335,8 +2335,8 @@ function Material.Load(Config)
 			local MenuAdded, MenuButton = TryAddMenu(Slider, Menu, {})
 			
 			if MenuAdded then
-				SliderValue.Position -= UDim2.fromOffset(25,0)
-				SliderTracker.Size -= UDim2.fromOffset(20,0)
+				SliderValue.Position = SliderValue.Position - UDim2.fromOffset(25,0)
+				SliderTracker.Size = SliderTracker.Size - UDim2.fromOffset(20,0)
 				MenuButton.ImageColor3 = Theme.SliderAccent
 			end
 			
@@ -2355,7 +2355,7 @@ function Material.Load(Config)
 				local SliderDef = math.clamp(SliderConfig.Def, SliderMin, SliderMax) or math.clamp(50, SliderMin, SliderMax)
 				local DefaultScale =  (SliderDef - SliderMin) / (SliderMax - SliderMin)
 				local SizeFromScale = (MinSize +  (MaxSize - MinSize)) * DefaultScale
-				SizeFromScale -= (SizeFromScale % 2)
+				SizeFromScale = SizeFromScale - (SizeFromScale % 2)
 				SliderDot.Position = UDim2.fromScale(DefaultScale,0.5) - UDim2.fromOffset(SizeFromScale/2,SizeFromScale/2)
 			end
 			
@@ -2364,7 +2364,7 @@ function Material.Load(Config)
 				local SliderDef = math.clamp(SliderConfig.Def, SliderMin, SliderMax) or math.clamp(50, SliderMin, SliderMax)
 				local DefaultScale =  (SliderDef - SliderMin) / (SliderMax - SliderMin)
 				local SizeFromScale = (MinSize +  (MaxSize - MinSize)) * DefaultScale
-				SizeFromScale -= (SizeFromScale % 2)
+				SizeFromScale = SizeFromScale - (SizeFromScale % 2)
 				SliderDot.Position = UDim2.fromScale(DefaultScale,0.5) - UDim2.fromOffset(SizeFromScale/2,SizeFromScale/2)
 			end
 			
