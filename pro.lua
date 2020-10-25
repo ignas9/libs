@@ -770,7 +770,8 @@ do -- UI Library
 					end
 				end
 
-				UserInputService.InputBegan:connect(function(input)
+                UserInputService.InputBegan:connect(function(input,typing)
+                    if typing then return end
 					if Bind.Binding then
 						if input.KeyCode == Enum.KeyCode.Backspace then
 							SetKey(Bind.Key)
@@ -786,23 +787,7 @@ do -- UI Library
 							end
 						end
 						DisconnectLoop()
-					else
-						if not Library.Open then
-							if input.KeyCode.Name == Bind.Key.Name or input.UserInputType.Name == Bind.Key.Name then
-								Bind.Holding = true
-								if Bind.Hold then
-									Loop = RunService.RenderStepped:connect(function()
-										Bind.Callback()
-										if Library.Open or Bind.Holding == false or not Bind.Hold then
-											DisconnectLoop()
-										end
-									end)
-								else
-									Bind.Callback()
-								end
-							end
-						end
-					end
+                    end
 				end)
 				
 				UserInputService.InputEnded:connect(function(input)
