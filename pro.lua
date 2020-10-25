@@ -164,8 +164,8 @@ do -- UI Library
 		Theme = Color3.fromRGB(255,65,65)
 	}
 
-	UserInputService.InputBegan:connect(function(input)
-		if input.KeyCode == Library.settings.UiToggle and Library.Base then
+	UserInputService.InputBegan:connect(function(input,typing)
+		if input.KeyCode == Library.settings.UiToggle and Library.Base and not typing then
 			Library.Open = not Library.Open
 			if Library.FocusedTab then
 				if Library.Open then
