@@ -216,6 +216,7 @@ do
 			Name = title,
 			Parent = game.CoreGui,
 				DisplayOrder = 9999999999999999999,
+				ZIndexBehavior = Enum.ZIndexBehavior.Global,
 		}, {
 			utility:Create("ImageLabel", {
 				Name = "Main",
