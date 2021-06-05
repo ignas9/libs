@@ -214,7 +214,6 @@ do
 	function library.new(title)
 		local container = utility:Create("ScreenGui", {
 			Name = title,
-			Parent = game.CoreGui,
 				DisplayOrder = 9999999999999999999,
 				ZIndexBehavior = Enum.ZIndexBehavior.Global,
 		}, {
@@ -296,6 +295,8 @@ do
 		
 		utility:InitializeKeybind()
 		utility:DraggingEnabled(container.Main.TopBar, container.Main)
+		syn.protect_gui(container)
+		container.Parent = game.CoreGui
 		
 		return setmetatable({
 			container = container,
